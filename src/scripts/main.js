@@ -1,24 +1,30 @@
 'use strict';
 
-const spider = document.querySelector('.spider');
-const walls = document.querySelector('.walls');
+document.addEventListener('DOMContentLoaded', () => {
+  const spider = document.querySelector('.spider');
+  const walls = document.querySelector('.walls');
 
-document.addEventListener('click', (e) => {
-  const wallsRect = walls.getBoundingClientRect();
+  if (!spider || !walls) {
+    return;
+  }
 
-  const spiderRect = spider.getBoundingClientRect();
-  const spiderWidth = spiderRect.width;
-  const spiderHeight = spiderRect.height;
+  document.addEventListener('click', (e) => {
+    const wallsRect = walls.getBoundingClientRect();
 
-  const clickX = e.clientX - wallsRect.left;
-  const clickY = e.clientY - wallsRect.top;
+    const spiderRect = spider.getBoundingClientRect();
+    const spiderWidth = spiderRect.width;
+    const spiderHeight = spiderRect.height;
 
-  let newLeft = clickX - spiderWidth / 2;
-  let newTop = clickY - spiderHeight / 2;
+    const clickX = e.clientX - wallsRect.left;
+    const clickY = e.clientY - wallsRect.top;
 
-  newLeft = Math.max(0, Math.min(newLeft, wallsRect.width - spiderWidth));
-  newTop = Math.max(0, Math.min(newTop, wallsRect.height - spiderHeight));
+    let newLeft = clickX - spiderWidth / 2;
+    let newTop = clickY - spiderHeight / 2;
 
-  spider.style.left = `${newLeft}px`;
-  spider.style.top = `${newTop}px`;
+    newLeft = Math.max(0, Math.min(newLeft, wallsRect.width - spiderWidth));
+    newTop = Math.max(0, Math.min(newTop, wallsRect.height - spiderHeight));
+
+    spider.style.left = `${newLeft}px`;
+    spider.style.top = `${newTop}px`;
+  });
 });
